@@ -1,3 +1,6 @@
+# Conditional build:
+%bcond_without	ntfs_3g		# build without ntfs-3g (avoid GPLv2 dependency)
+
 Summary:	Open source Windows Imaging (WIM) library
 Name:		wimlib
 Version:	1.13.2
@@ -9,11 +12,11 @@ Source0:	https://wimlib.net/downloads/%{name}-%{version}.tar.gz
 URL:		https://wimlib.net/
 BuildRequires:	libfuse-devel
 BuildRequires:	libxml2-devel
-BuildRequires:	ntfs-3g-devel >= 1:2011.4.12
+%{?with_ntfs_3g:BuildRequires:	ntfs-3g-devel >= 1:2011.4.12}
 BuildRequires:	openssl-devel
 BuildRequires:	pkgconfig
 Requires:	libfuse-tools
-Requires:	ntfs-3g-libs >= 1:2011.4.12
+%{?with_ntfs_3g:Requires:	ntfs-3g-libs >= 1:2011.4.12}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -58,7 +61,8 @@ Tools for creating, modifying, extracting, and mounting WIM files.
 
 %build
 %configure \
-	--disable-silent-rules
+	--disable-silent-rules \
+	%{!?with_ntfs_3g:--without-ntfs-3g}
 %{__make}
 
 %install
