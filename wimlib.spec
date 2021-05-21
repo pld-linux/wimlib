@@ -50,6 +50,7 @@ Static wimlib library.
 Summary:	Tools for creating, modifying, extracting, and mounting WIM files
 Group:		Applications/System
 Requires:	%{name} = %{version}-%{release}
+Suggests:	mkisofs
 
 %description tools
 Tools for creating, modifying, extracting, and mounting WIM files.
