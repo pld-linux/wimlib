@@ -3,12 +3,12 @@
 
 Summary:	Open source Windows Imaging (WIM) library
 Name:		wimlib
-Version:	1.13.4
-Release:	2
+Version:	1.13.5
+Release:	1
 License:	GPL v3+ or LGPL v3+
 Group:		Libraries
 Source0:	https://wimlib.net/downloads/%{name}-%{version}.tar.gz
-# Source0-md5:	3e73d06fd78d6541ba98478ac9cc295e
+# Source0-md5:	ac4049981a2f887e46cb877895146fa2
 URL:		https://wimlib.net/
 BuildRequires:	libfuse-devel
 BuildRequires:	libxml2-devel
