@@ -3,19 +3,17 @@
 
 Summary:	Open source Windows Imaging (WIM) library
 Name:		wimlib
-Version:	1.13.6
+Version:	1.14.0
 Release:	1
 License:	GPL v3+ or LGPL v3+
 Group:		Libraries
 Source0:	https://wimlib.net/downloads/%{name}-%{version}.tar.gz
-# Source0-md5:	e3921d3212dd3f30ab2fc6b133a514cb
+# Source0-md5:	2e567321c3c0a19ef76af29b07efcc96
 URL:		https://wimlib.net/
-BuildRequires:	libfuse-devel
-BuildRequires:	libxml2-devel
+BuildRequires:	libfuse3-devel
 %{?with_ntfs_3g:BuildRequires:	ntfs-3g-devel >= 1:2011.4.12}
-BuildRequires:	openssl-devel
 BuildRequires:	pkgconfig
-Requires:	libfuse-tools
+Requires:	libfuse3-tools
 %{?with_ntfs_3g:Requires:	ntfs-3g-libs >= 1:2011.4.12}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -82,7 +80,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc COPYING NEWS README
+%doc COPYING NEWS.md README.md
 %attr(755,root,root) %{_libdir}/libwim.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libwim.so.15
 
