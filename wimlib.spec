@@ -1,5 +1,6 @@
 # Conditional build:
 %bcond_without	ntfs_3g		# build without ntfs-3g (avoid GPLv2 dependency)
+%bcond_without	static_libs	# static library
 
 Summary:	Open source Windows Imaging (WIM) library
 Name:		wimlib
@@ -13,6 +14,7 @@ URL:		https://wimlib.net/
 BuildRequires:	libfuse3-devel
 %{?with_ntfs_3g:BuildRequires:	ntfs-3g-devel >= 1:2011.4.12}
 BuildRequires:	pkgconfig
+BuildRequires:	rpmbuild(macros) >= 1.527
 Requires:	libfuse3-tools
 %{?with_ntfs_3g:Requires:	ntfs-3g-libs >= 1:2011.4.12}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -61,6 +63,7 @@ Tools for creating, modifying, extracting, and mounting WIM files.
 %build
 %configure \
 	--disable-silent-rules \
+	%{__enable_disable static_libs static} \
 	%{!?with_ntfs_3g:--without-ntfs-3g}
 %{__make}
 
@@ -90,9 +93,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/wimlib.h
 %{_pkgconfigdir}/wimlib.pc
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libwim.a
+%endif
 
 %files tools
 %defattr(644,root,root,755)
